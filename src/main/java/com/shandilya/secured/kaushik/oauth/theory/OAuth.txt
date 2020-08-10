@@ -1,0 +1,73 @@
+OAuth
+------
+-> OAuth is an open standard for access delegation, commonly used as a way for internet users to grant websites or app
+   access to their information on other websites but without giving them the passwords
+-> OAuth is meant for authorization not authentication
+-> OAuth generates token which allows access to a particular service with limited access
+
+
+OAuth Terminologies
+--------------------
+-> Resource
+   . Something which is being protected and access to which is required
+   . Photos
+
+-> Resource Owner
+   . The entity which is holding on to the resource and needs to allow or grant permission for the resource to be accessed
+   . Person using the Photo printing service and who owns the photo on Google Drive
+
+-> Resource Server
+   . The place where the resource is hosted. The entity which is serving the resource to the request
+   . Google drive which contains the resource
+
+-> Client
+   . The entity which requires the access to the resource in the scenario
+   . The Photo Printing service/App which needs permission to the photos for printing
+
+-> Authorization Server
+   . The server which issues access tokens to the client
+   . It is usually coupled with the resource server
+
+
+OAuth Flow 1 : Authorization Code Flow
+----------------------------------------
+1. Resource owner asks the Photo Printing service (client) to go fetch the photo from Google Drive
+2. Client (Photo Printing Service) Talks to the Authorization Server regarding the access to the photos on G-Drive
+3. Authorization Server doesn't trust the Client and goes talking to the Resource Owner regarding the request and the
+   artifacts required
+4. Resource Owner says I am the person who asked for this access, so it's cool, go ahead
+5. Authorization Server talks back to the Client saying that resource owner confirmed your request, so here is your
+   Authorization Token (Short Lived)
+6. The client takes this Authorization Token and talks to the Authorization Server saying it's me the client, may I have
+   the Access Token please?
+7. Authorization Server responds back with the required Access Token. Now that I fully trust you and have given you the
+   access token, go ahead and contact the resource server and access the resource which is required for you
+8. Client talks to the resource server (Google Drive) with the API call (along with the access token)
+9. Google Drive (resource server) validates the token (or gets it validated by the authorization server) and if there in
+   no problem then the Google Drive serves (hands over) the required photos.
+10. Step 9 marks the completion of the flow. This is the best and the safest flow for OAuth Dance
+
+
+OAuth Flow 2 : Implicit Flow
+------------------------------
+It is similar to the flow number with one difference where there is no exchange of the Authorization Token, rather the
+access token is handed over to the client directly at step 6. It's a little bit less secure.
+
+This flow isn't as much secure. It is primarily used with the JS applications with short lived access tokens.
+
+OAuth Flow 3 : Client Credentials Flow : Microservices Authorization
+----------------------------------------------------------------------
+-> This flow is used when the client is super trustworthy (which is the case in case of microservices)
+
+-> UseCase
+   => There are two microservices M1 and M2. M2 talks to a DB and there is an api for this which can be consumed by
+      some other service.
+   => Now the microservice M1 want to access M2 API in the point 1
+   => M2 would be containing many other APIs as well which aren't supposed to be accessed by the M1, how is this requirement
+      enforced?
+
+1. M1 talks to an Auth Server and mentions that it want to access an API in M2
+2. Auth server given an Access Token
+3. M1 talks to M2 with the Access Token
+4. If the M2 finds that the Access Token is valid then in that the communication is allowed, or else denied
+

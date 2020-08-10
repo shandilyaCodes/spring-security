@@ -1,0 +1,15 @@
+Flow in case of the JPA authentication in Spring Boot Security App
+=====================================================================
+
+-> Create an entity which holds the USER details, let's call it User
+-> The entries of the User table would be
+   {
+        id, active, password, roles, user_name
+   }
+
+-> Create the Config file holding the configuration for the JPA authentication
+-> Autowire private UserDetailsService userDetailsService
+-> Inside the authentication logic do auth.userDetailService(userDetailsService)
+
+-> Extend UserDetailsService with the class name as MyUserDetailsService and override the method loadByUserName
+-> Make use of the UserRepository to load the user object by the userName and return the instance of UserDetails

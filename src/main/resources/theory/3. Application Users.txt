@@ -1,0 +1,13 @@
+Application Users
+==================
+In the case of the Basic Authentication, the default username was user and some random password was generate which was
+stored in the in memory database. But when the application is started, all these information is lost, thus we strive to
+persist these information in some actual database.
+
+A typical User information would be containing the below information
+
+-> UserName
+-> Password (Must be encoded)
+-> Role(s) (ROLE_NAME)
+-> Authorities
+-> and Some more depending on the use case ...

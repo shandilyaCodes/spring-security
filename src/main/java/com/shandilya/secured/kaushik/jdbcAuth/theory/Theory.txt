@@ -1,0 +1,7 @@
+-> Dependencies Required
+   * Security, Web, H2, JDBC API
+
+-> Inject DataSource in the configuration file
+
+-> auth.jdbcAuthentication().dataSource(datasource).withDefaultSchema() and so on.....
+

@@ -1,0 +1,9 @@
+How to Configure Spring Security Authorization ?
+===================================================
+
+-> We'll use HttpSecurity
+-> It enables us to configure paths which can be accessed by whom
+-> We need to override configure(HttpSecurity auth) by extending the config class to WebSecurityConfigurerAdapter
+
+Most Restrictive to the least restrictive
+

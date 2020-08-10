@@ -1,0 +1,25 @@
+-> OAuth can also be used for the case of Authentication as well if used wisely
+-> As part of the OAuth authorization mechanism we are going to talk to the 3rd party service providers such as Google,
+   Facebook, LinkedIN, GitHub etc.
+-> These 3rd party services do provide us the access tokens and other tokens. Now we know that these platforms are
+   doing the security work for their customers, can we somehow leverage this thing to validate/authenticate our users?
+-> This approach is used to to authentication of the users using OAuth
+
+-> In this flow the client application makes an OAuth call to the Facebook/Google etc
+-> The 3rd party application replies back with the token containing the email id and other relevant details
+-> The Spring Security captures this thing and puts it into the Spring Security Context to simulate a logged in user
+-> So effectively rather than maintaining the user details on our side for authentication we are going to leverage the
+   3rd party application profile APIs and make use of them to register and login users at our platform
+
+-> Put the below dependency
+
+   		<dependency>
+   			<groupId>org.springframework.security.oauth.boot</groupId>
+   			<artifactId>spring-security-oauth2-autoconfigure</artifactId>
+   			<version>2.1.3.RELEASE</version>
+   		</dependency>
+
+-> Annotate with @@EnableOAuth2Sso
+
+-> Baseline : It's not the best practice to do authentication with the OAuth but can be used in most of the cases with
+   some preventive care and measures.

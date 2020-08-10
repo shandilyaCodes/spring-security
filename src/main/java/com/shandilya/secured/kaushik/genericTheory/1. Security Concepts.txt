@@ -1,0 +1,46 @@
+Five Spring Security Concepts
+==============================
+
+AUTHENTICATION
+--------------
+-> This asks the question "Who Are You?" and this is answered by sharing some sort of Identification entity (UID/PWD)
+
+=> There are two kind of authentication
+    -> Knowledge Based Authentication
+       -> In this kind of authentication an Identification Entity e.g. Password, Pin Code, etc is shared
+       -> Knowledge Based Authentication is easy to implement but is not secured
+    -> Possession Based Authentication
+       -> This way it tries to identify if you are in the possession of something so that can verify that you are the
+          real slim shady!
+       -> E.G. : Phone/Text Messages, key cards/badges, Access Token Device etc.
+
+=> Some applications use a mix of Knowledge Based and Possession Based Authentication, which is referred to as Multi
+   Factor Authentication.
+
+
+AUTHORIZATION
+--------------
+-> This answers the question "Can this user do this?" It's a yes/no question
+-> So as the first step we ask the question who is the person who is trying to login to a system and as the second
+   questions we ask is, "Is the User allowed to do whatever they are trying to do?".
+
+
+PRINCIPAL
+----------
+-> Principal is the currently logged in User. It identifies the person who has authenticated
+
+
+AUTHORITY (GRANTED AUTHORITY)
+------------------------------
+-> Authority or Granted Authority in Spring Security is a bunch of Permissions defined by the application maker which
+   defines what part of the application a given logged in user is allowed to use
+-> These are fine grained permissions of what the user can do
+
+
+ROLES
+------
+-> The problem with the Authority in the above concept is that it's too much of configuration to do once a new user is
+   created. So ROLES can be thought of as a bucket or umbrella of certain Authorities
+-> A person with a given ROLE can have a set of given authorities and thus a matching ROLE can be assigned to a user
+   rather than assigning all the concerned authorities to the user
+-> Where the authorities are fine grained permissions, roles are more coarse grained permissions

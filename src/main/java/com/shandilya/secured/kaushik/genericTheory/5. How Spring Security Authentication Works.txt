@@ -1,0 +1,47 @@
+-> All the enterprise frameworks in Java Language are built on the top of the servlet technology. Filters are an important
+   part of the Servlet Technology. What Filters do is they would intercept as and when there is any request to the application
+
+-> Spring Boot is no different and Spring Security heavily makes use of the Filters to orchestrate the events of security
+
+-> There is the DelegatingFilterProxy which happens to seat in the front of the application at the Filter layer
+
+-> Authentication is an interface in the Spring Security framework which acts as a placeholder for the authentication
+   information. When the request is made to authenticate something then at that point of time this interface holds the
+   credentials and once the authentication process completes successfully then it holds the Principal object.
+
+-> Authentication can be thought of as like a DTO for the authentication related info.
+
+-> AuthenticationProvider is something which does that actual authentication using the authenticate() method
+
+-> It also contains one method called as supports() which tells where a certain type of authentication is supported by
+   the AuthenticationProvider or not
+
+-> In real case scenarios we would be having multiple authentication providers
+
+-> The authentication provider in order to validate the claims on a given credentials needs to communicate to any identity
+   store. That communication is abstracted out in something called as UserDetailsService
+
+-> On a very high level below are the steps involved behind the scenes for Spring Security Working
+
+   1. Any given request is intercepted by DelegatingFilterProxy. The authentication items are put in the Authentication
+      object and passed onto the AuthenticationManager.
+
+   2. AuthenticationManager talks to AuthenticationProvider and asks if it supports the asked way of authentication.
+
+   3. If it's supported then the given way of authentication and authentication artifacts are validated. Principal is
+      returned out of this step.
+
+   4. The response bubbles all the way up to the AuthenticationManager and Principal is put in the placeholder of the
+      Authentication object now.
+
+   5. This Authentication object is put in the ThreadLocal. In every step of the application we always need to know who,
+      the currently logged in user is. There is a SecurityContext which is associated with the current thread. This
+      Authentication object is placed in the Security Context in case of successful login to be used in authorization or
+      to be used in identifying the current logged in user and more. What about the subsequent requests? There is a
+      mechanism which allows this context to be associated with the session. And this is the reason why you authenticate
+      only once and you can access an application for the duration of that session. This binding of the Principal to session
+      is done by another filter. There are a bunch filters in the Spring security filter chain.There is one filter which
+      manages the users session. It takes in the authenticated principal and associates it with the user session. The same
+      filter is also responsible for taking the principle from the session and saving the same to thread local again, so it's
+      available for the framework.
+

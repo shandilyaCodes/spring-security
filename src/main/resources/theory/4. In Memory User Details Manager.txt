@@ -1,0 +1,31 @@
+-> Override UserDetailsService
+-> Provide Bcrypt password encoding
+
+=> Override UserDetailsService
+
+@Bean
+@Override
+protected UserDetailService userDetailsService() {
+   UserDetails ud = User.builder()
+                        .username("shandilya")
+                        .password("shandilya") // => change to encoder.encode("shandilya") to make it work properly
+                        .roles("STUDENT")
+                        .build();
+
+    return new InMemoryUserDetailsManager(ud);
+}
+
+At this point of time if we run the application and provide the uid/pwd it would give an exception saying that there is
+no password encoder provided
+
+=> Provide BCrypt password Encoder
+
+-> Make a configuration class and return the bean of type PasswordEncoder. We will be using BCrypt flavour of the encoder
+
+@Configuration
+public class PasswordConfig {
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(10); // 10 is the strength of encoding
+    }
+}

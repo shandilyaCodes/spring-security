@@ -1,0 +1,41 @@
+Basic Auth
+============
+
+-> Client wants to communicate to the Server
+-> Client sends a GET request to the server, gets back a 401 Unauthorised
+-> GET request with Base 64 encoded Username and Password in the request header
+-> Server checks if the username exists, if yes then verifies the password
+-> If the authentication is successful, the server returns 200 OK
+
+-> This kind of authentication is not much of an use in the modern web application where the user would have to send
+   these credential information on every request. It's rather helpful in scenarios where we are communicating to the
+   3rd party APIs
+
+Implementing the Basic Auth in Spring Boot
+=============================================
+
+-> Make a configuration class, annotate it with the @Configuration
+-> Also, annotate this configuration class with @EnableWebSecurity
+-> The class would extend WebSecurityConfigurerAdapter
+-> We would override the "void configure(HttpSecurity http)" method
+-> http
+        .authorizeRequests() [Authorize Requests]
+        .antMatchers("/", "index", "/css/*", "/js/*") [Filter these resources at these URLs]
+        .permitAll() [Permit access to the filtered URLs obtained in the ant matchers section]
+        .anyRequests() [For Any other request]
+        .authenticated() [It would be authenticated]
+        .and()
+        .httpBasic(); [Using the Basic Authentication mechanism]
+
+-> The bad part about this type of basic auth is that we don't have the logout option, given the fact that the login
+   information is shared to the server from the client on every request.
+
+-> Once the container is killed and the application is restarted then the application would need authentication again
+
+-> To test the same in POSTMAN, go to the Authorization section and select Basic Auth
+-> Provide the combination of username and password and send the request
+-> When we send the request, we get a success response
+-> When we go to the headers section we can see that under the Authorization key there is an entry something like
+   Basic dXNlcjpiOTg1ZDU5MS0yYzZlLTQ2N2EtYTYzMC03YmQ2OGZiNzNjYjg=, which tell the auth type is Basic and the remainder
+   of the String is the combination of username and the password in the Base64.
+

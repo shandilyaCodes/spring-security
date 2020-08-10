@@ -1,0 +1,9 @@
+Spring Security is an application level framework and can do the below things
+
+-> Username/Password Authentication
+-> SSO/Okta/LDAP
+-> App Level Authorization
+-> Intra App Authorization
+-> Microservices Security (JWT)
+-> Method level Security
+

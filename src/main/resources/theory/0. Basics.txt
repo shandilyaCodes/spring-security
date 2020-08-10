@@ -1,0 +1,12 @@
+-> In order to provide Spring Security support to the application we need to add the below dependency
+
+   		<dependency>
+   			<groupId>org.springframework.boot</groupId>
+   			<artifactId>spring-boot-starter-security</artifactId>
+   		</dependency>
+
+-> Just on the addition of the above dependency we get the login page by default
+
+-> The default username is the user and the password is automatically generated which can be picked from the Console o/p
+
+-> To logout from this default login we need to navigate to the {base URL}/logout and click on the logout

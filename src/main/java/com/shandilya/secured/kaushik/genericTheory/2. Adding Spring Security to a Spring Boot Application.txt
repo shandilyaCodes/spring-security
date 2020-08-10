@@ -1,0 +1,20 @@
+Adding Spring Security To Spring Boot Application
+===================================================
+
+-> Add the spring-boot-starter-security in the pom.xml and it will configure a form authentication
+-> By adding just the dependency on the classpath Spring boot is able to provide us the login page and form by the help
+   of Filters
+-> Spring Security puts in a filter (thanks to the underlying servlet technology) which examines all the requests to the
+   application and allows or denies them wisely
+-> Spring Security Default behaviour
+   -> Adds a mandatory authentication for all the URLs (Except the Error Page URL)
+   -> Adds a login form
+   -> Handles the login error
+   -> Creates a User and sets a default password
+   -> Spring Security generates a new password each time you restart the app
+   -> The default behaviour of the Spring security can be changed by providing these below configs in the application.pr
+      file
+      spring.security.user.name = foo
+      spring.security.user.password = foo
+
+

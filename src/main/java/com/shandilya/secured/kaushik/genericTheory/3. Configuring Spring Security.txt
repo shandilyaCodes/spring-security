@@ -1,0 +1,24 @@
+How to configure Spring Security Authentication ?
+===================================================
+
+-> The way to configure Spring security is by affecting something called as Authentication Manager
+-> AuthenticationManager is something that manages authentication in a spring security application
+-> AuthenticationManager has in fact a method called as authenticate() which does the task of auth
+-> The way to affect AuthenticationManager is not by creating own AuthenticationManager but to configure what AM does
+   using a builder pattern. We don't work with the AM directly for the most part, what we do instead is work with a
+   builder class called as "AuthenticationManagerBuilder". We use AuthenticationManagerBuilder to configure what the
+   application should actually do.
+-> Once we are done configuring an AuthenticationManagerBuilder we can imagine an "AuthenticationManager" being created
+   somehow which has the configuration which you want.
+
+-> Steps
+   1 : Get hold of the AuthenticationManagerBuilder
+     -> By Extending the configuration class to "WebSecurityConfigurerAdapter"
+     -> Override configure(AuthenticationManagerBuilder auth) method
+     -> Build the auth object
+     -> Expose a bean of type PasswordEncoder and inject it here to encode the password
+     -> Annotate the class with @EnableWebSecurity. This tell the Spring Boot that this a web security configuration
+   2 : Set Configuration on it
+
+
+->
